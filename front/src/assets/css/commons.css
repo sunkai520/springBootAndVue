@@ -1,0 +1,52 @@
+body,
+html {
+    margin: 0;
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    min-width: 1440px;
+    overflow: auto;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*按钮样式*/
+.el-button--primary {
+    --el-button-font-color: #ffffff;
+    --el-button-background-color: #2950B8;
+    --el-button-border-color: #2950B8;
+    --el-button-hover-color: #3f60bd;
+    --el-button-active-font-color: #e6e6e6;
+    --el-button-active-background-color: #3f60bd;
+    --el-button-active-border-color: #3f60bd;
+}
+
+/*分页样式*/
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #2950B8;
+    color: white;
+}
+
+/*输入框样式*/
+.el-input {
+    --el-input-focus-border: #2950B8;
+}
