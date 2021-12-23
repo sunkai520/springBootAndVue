@@ -56,6 +56,13 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <!--token生成工具-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
