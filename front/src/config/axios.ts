@@ -25,7 +25,15 @@ const requestError = (error: AxiosError) => {
 //响应打断函数
 const responseConfig = (response: AxiosResponse) => {
   //响应数据异常处理
-  if (response.status != 200) {
+  if (response.data.code != 200) {
+    if(response.data.code==6001){
+      ElMessage({
+        type: 'error',
+        message: `token:(${response.data.msg})`,
+      })
+      router.replace("/login")
+      return Promise.reject(`token异常`);
+    }
     return Promise.reject(`接口响应异常`);
   }
   return response.data;

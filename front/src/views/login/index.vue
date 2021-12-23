@@ -72,15 +72,15 @@ export default {
       rform.value.validate(async (valid) => {
         if (valid) {
           let res = await login(states.ruleForm);
-          if(res.data.code==200){
+          if(res.code==200){
             router.push("/firstPage")
+            localStorage.setItem("token",res.data.token)
           }else{
             ElMessage({
               type:"error",
-              message:res.data.msg
+              message:res.msg
             })
           }
-          console.log(res,"2222")
         }
       });
     };
