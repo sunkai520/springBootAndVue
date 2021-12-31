@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-
+//用户信息相关接口
 public class UserList {
     @Autowired
     UserService userService;

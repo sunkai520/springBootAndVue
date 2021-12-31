@@ -2,8 +2,8 @@
   <div class="login">
     <start-back></start-back>
     <div class="loginForm">
-      <div class="title">5G微热点感知</div>
-      <div class="subTitle">5G Management System</div>
+      <div class="title">xxxxxxxxx</div>
+      <div class="subTitle">xxxxxxxxx</div>
       <el-form
         ref="rform"
         :model="ruleForm"
@@ -75,6 +75,7 @@ export default {
           if(res.code==200){
             router.push("/firstPage")
             localStorage.setItem("token",res.data.token)
+            localStorage.setItem("user",JSON.stringify(res.data))
           }else{
             ElMessage({
               type:"error",

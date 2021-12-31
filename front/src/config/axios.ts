@@ -6,6 +6,7 @@ const { isWhiteList } = require("./whiteForm.js")
 axios.defaults.timeout = 5000
 //请求打断函数
 const requestConfig = (config: AxiosRequestConfig) => {
+  console.log("监听请求")
   if (!isWhiteList(config.url)) {
     const token = localStorage.getItem('token');
     if (token) {

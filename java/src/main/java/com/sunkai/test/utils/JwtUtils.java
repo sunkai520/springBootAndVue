@@ -1,18 +1,23 @@
-package com.sunkai.test.jwtUtils;
+package com.sunkai.test.utils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import lombok.Data;
 import java.util.Calendar;
 import java.util.Map;
-@Data
+/**
+ *jwt工具类 使用java-jwt
+ * token由三部分组成
+ * 1:header头部可默认。
+ * 2:荷载 用户信息相关的信息进行base64加密(切记不可将密码也写入)
+ * 3:签名 是将secret签名+header+荷载再进行加密
+ * **/
 public class JwtUtils {
     //签名秘钥 不可随意泄露
     private static final String SECRET = "jwt_secret";
     public static String createJwt(Map<String,String> map){
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND,20);//签名过期时间 单位秒
+        calendar.add(Calendar.DATE,1);//签名过期时间 单位天
         JWTCreator.Builder builder = JWT.create();
         map.forEach((k,v)->{
             builder.withClaim(k,v);

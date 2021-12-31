@@ -35,12 +35,17 @@
 <script>
 import { onMounted, reactive, toRefs } from "vue-demi";
 import pageHooks from "@/utils/pageHooks";
+import {getBkList} from "@/api/bkList"
+import { use } from 'element-plus/lib/locale';
 export default {
   setup() {
     const { pageParams, handlePageChange, handleSizeChange } =
       pageHooks(getList);
-    function getList() {
+   async function getList() {
       console.log("获取列表");
+      let user = JSON.parse(localStorage.getItem("user"));
+      let res = await getBkList({userId:user.id})
+      console.log(res,"res")
     }
     onMounted(()=>{
         getList()

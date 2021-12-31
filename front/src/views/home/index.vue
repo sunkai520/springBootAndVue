@@ -17,7 +17,7 @@ import { reactive, toRefs } from "@vue/reactivity";
 export default {
   setup() {
     let states = reactive({
-      code: "var a = 1;function(){conso.log(2)}",
+      code: "var a = 2;function(){conso.log(2)}",
     });
     return {
       ...toRefs(states),

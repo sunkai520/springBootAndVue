@@ -2,7 +2,7 @@ package com.sunkai.test.controller;
 
 import com.sunkai.test.bean.Result;
 import com.sunkai.test.bean.User;
-import com.sunkai.test.jwtUtils.JwtUtils;
+import com.sunkai.test.utils.JwtUtils;
 import com.sunkai.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,6 @@ import java.util.Map;
 public class login {
     @Autowired
     UserService userService;
-    @ResponseBody
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public Result getUser(@RequestBody Map obj){
         Result result = new Result();
@@ -37,6 +36,9 @@ public class login {
             String token = JwtUtils.createJwt(map);
             Map keyValues=new HashMap<>();
             keyValues.put("token",token);
+            keyValues.put("id",user1.getId());
+            keyValues.put("name",user1.getName());
+            keyValues.put("loginName",user1.getLoginName());
             result.setData(keyValues);
             result.setCode(200);
             result.setMsg("登录成功");

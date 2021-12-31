@@ -9,6 +9,6 @@ public interface UserMapper extends BaseMapper<User> {
 //    @Insert("insert into person(name,sex,age) values(#{name},#{sex},#{age})")
 //    @Options(useGeneratedKeys = true,keyProperty = "id")
 //    public void  insert(Person person);
-@Select("select * from User where login_name=#{loginName}")
+@Select("select * from User where loginName=#{loginName}")
     User getUser(String loginName);
 }

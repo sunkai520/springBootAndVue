@@ -20,9 +20,9 @@ export default {
     let states = reactive({
       menus: [
         {
-          name: "设备管理",
+          name: "bk设置",
           expand: false,
-          childrens: [{ name: "IMSI采集列表",path:"imsList"}],
+          childrens: [{ name: "bk列表",path:"imsList"},{ name: "添加bk",path:"addBk"}],
         },
         { name: "系统管理", expand: false ,childrens: [{ name: "用户信息",path:"users" }],},
         { name: "权限管理", expand: false ,childrens: [{ name: "角色管理" }],},
