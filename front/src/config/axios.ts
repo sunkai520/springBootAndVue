@@ -35,6 +35,13 @@ const responseConfig = (response: AxiosResponse) => {
       router.replace("/login")
       return Promise.reject(`token异常`);
     }
+    if(response.data.code==201){
+      ElMessage({
+        type: 'error',
+        message: `${response.data.msg}`,
+      })
+      return Promise.reject(response.data.msg);
+    }
     return Promise.reject(`接口响应异常`);
   }
   return response.data;

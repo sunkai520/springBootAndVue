@@ -14,11 +14,17 @@
 
 <script>
 import { reactive, toRefs } from "@vue/reactivity";
+import { onMounted } from '@vue/runtime-core';
 export default {
   setup() {
     let states = reactive({
-      code: "var a = 2;function(){conso.log(2)}",
+      code: "1",
     });
+    onMounted(()=>{
+      setTimeout(()=>{
+        states.code="let a = 2;function(){conso.log(2)}"
+      },2000)
+    })
     return {
       ...toRefs(states),
     };

@@ -13,7 +13,6 @@ class TestApplicationTests {
     @Test
     void contextLoads() {
         Bklist bk = new Bklist();
-        bk.setCode("dddddd1");
         bk.setDes("测试数据1");
         bk.setTitle("测试");
         bk.setUserid(2);

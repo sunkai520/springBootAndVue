@@ -6,14 +6,22 @@ let Highlight = {};
 Highlight.install = function (Vue) {
     // 自定义指令 v-highlight
     Vue.directive('highlight', {
-        mounted: function(el) {
-            console.log(el);
+        
+        beforeUpdate:function(el){
             let blocks = el.querySelectorAll('pre code');
-            console.log(blocks,"blocks")
+            console.log(blocks,"block")
             for (let i = 0; i < blocks.length; i++) {
+                // console.log(blocks[i].removeAttribute("class"),"block")
+                blocks[i].removeAttribute("class")
                 Hljs.highlightBlock(blocks[i]);
             }
         },
+        mounted: function(el) {
+            let blocks = el.querySelectorAll('pre code');
+            for (let i = 0; i < blocks.length; i++) {
+                Hljs.highlightBlock(blocks[i]);
+            }
+        }
 
     })
 };
