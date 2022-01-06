@@ -1,18 +1,14 @@
 <template>
   <div class="home">
     <div class="header">
-      <div class="tit">xxxxxxx</div>
-      <div class="setting">
-        <div class="out" @click="loginOut">
-          <i class="iconfont">&#xe634;</i>
-          <div>退出</div>
-        </div>
+      <div class="tit">个人博客/技术博客</div>
+      <div class="menu">
+        <span @click="goHome">首页</span>
+        <span class="shu">/</span>
+        <span @click="goMe">关于我</span>
       </div>
     </div>
     <div class="ct">
-      <div class="natRouter">
-        <Menus></Menus>
-      </div>
       <div class="content">
         <router-view></router-view>
       </div>
@@ -21,10 +17,8 @@
 </template>
 <script>
 import { reactive, toRefs } from "vue-demi";
-import Menus from "@/components/menus.vue";
 import router from "@/router";
 export default {
-  components: { Menus },
   setup() {
     let loginOut = () => {
       localStorage.removeItem("token");
@@ -32,9 +26,17 @@ export default {
       router.replace("/login");
     };
     let states = reactive({});
+    let goHome = ()=>{
+      router.push("/")
+    }
+    let goMe=()=>{
+      router.push("/myCurriculum")
+    }
     return {
       ...toRefs(states),
       loginOut,
+      goHome,
+      goMe
     };
   },
 };
@@ -56,22 +58,22 @@ export default {
     );
     line-height: 60px;
     padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
+    position: relative;
+    text-align: center;
     .tit {
       color: white;
       font-weight: 600;
       font-size: 20px;
+      position: absolute;
     }
-    .setting {
-      .out {
+    .menu {
+      color: white;
+      .shu{
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      span{
         cursor: pointer;
-        display: flex;
-        color: white;
-        font-size: 14px;
-        > div {
-          margin-left: 5px;
-        }
       }
     }
   }
@@ -86,9 +88,8 @@ export default {
       height: 100%;
     }
     .content {
-      width: calc(100% - 150px);
+      width: 100%;
       height: 100%;
-      padding: 15px;
     }
   }
 }

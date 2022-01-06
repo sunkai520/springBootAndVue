@@ -6,13 +6,7 @@ const { isWhiteList } = require("./whiteForm.js")
 axios.defaults.timeout = 5000
 //请求打断函数
 const requestConfig = (config: AxiosRequestConfig) => {
-  console.log("监听请求")
-  if (!isWhiteList(config.url)) {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers['Authorization'] = `bearer ${token}`;
-    }
-  }
+
   return config;
 };
 
@@ -32,7 +26,6 @@ const responseConfig = (response: AxiosResponse) => {
         type: 'error',
         message: `token:(${response.data.msg})`,
       })
-      router.replace("/login")
       return Promise.reject(`token异常`);
     }
     if(response.data.code==201){

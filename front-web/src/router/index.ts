@@ -8,36 +8,24 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
     children: [
       {
-        path: '/firstPage',
-        name: 'firstPage',
-        component: () => import('@/views/home/index.vue')
-      },
-      {
-        path: '/imsList',
+        path: '/',
         name: 'imsList',
         component: () => import('@/views/imsList/index.vue')
       },
       {
-        path:"/users",
-        name:"users",
-        component:()=>import('@/views/users/index.vue')
-      },{
-        path:"/addBk",
-        name:"addBk",
-        component:()=>import('@/views/addBk/index.vue')
+        path: "/addBk",
+        name: "addBk",
+        component: () => import('@/views/addBk/index.vue')
+      },
+
+      {
+        path: '/myCurriculum',
+        name: 'myCurriculum',
+        component: () => import('@/views/myCurriculum/index.vue')
       }
     ]
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login/index.vue')
-  },
-  {
-    path: '/myCurriculum',
-    name: 'myCurriculum',
-    component: () => import('@/views/myCurriculum/index.vue')
-  }
+
 ]
 
 const router = createRouter({
@@ -92,7 +80,7 @@ const router = createRouter({
 //   }
 //   const userInfo= JSON.parse(localStorage.getItem("userInfo") as any);
 
- 
+
 //   if (to.path != "/login") {
 //       const bool = validateToken();
 //       if (!bool || !userInfo) {

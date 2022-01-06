@@ -16,6 +16,7 @@ export default {};
   width: 100%;
   height: 100%;
   background-image: linear-gradient(black, #3d67a7);
+  
 }
 .night {
   position: relative;

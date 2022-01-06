@@ -47,7 +47,6 @@
         <el-form-item label="内容">
           <div style="height:500px">
             <MdEditor
-              v-highlight
               v-model="ruleForm.text"
               @onUploadImg="onUploadImg"
               :pageFullScreen="pageFullScreen"

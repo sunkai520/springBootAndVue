@@ -1,69 +1,52 @@
 <template>
   <div class="list">
-    <div class="search">
-      <div style="margin-right: 20px">
-        <el-input v-model="val" placeholder="请输入关键词" />
+    <div class="midSection">
+      <div class="search">
+        <div style="margin-right: 20px">
+          <el-input v-model="val" placeholder="请输入关键词" />
+        </div>
+        <el-button type="primary" size="mini" @click="search">查询</el-button>
       </div>
-      <el-button type="primary" size="mini" @click="search">查询</el-button>
-    </div>
-    <div class="addBtn">
-      <el-button type="primary" size="mini" @click="addBk">新增</el-button>
-    </div>
-    <div class="table">
-      <div class="item" v-for="(k, index) in tableData" :key="index">
-        <div class="card">
-          <div class="imgg">
-            <el-image :src="'api/' + k.imageUrl">
-              <template #error>
-                <div class="image-slot">
-                  <img src="../../../src/assets/img/default.png" />
-                </div>
-              </template>
-            </el-image>
-          </div>
-          <div class="content">
-            <div class="title">{{ k.title }}</div>
-            <div class="des">
-              <p class="p1">{{ k.des }}</p>
+      <div class="table" v-loading="loading">
+        <div class="item" v-for="(k, index) in tableData" :key="index" @click="itemDetail(k)">
+          <div class="card">
+            <div class="imgg">
+              <el-image :src="'api/' + k.imageUrl">
+                <template #error>
+                  <div class="image-slot">
+                    <img src="../../../src/assets/img/default.png" />
+                  </div>
+                </template>
+              </el-image>
+            </div>
+            <div class="content">
+              <div class="title">{{ k.title }}</div>
+              <div class="des">
+                <p class="p1">{{ k.des }}</p>
+              </div>
             </div>
           </div>
-          <div class="options">
-            <!-- <el-button type="primary" size="mini" @click="seeBk(k)"
-            >查看</el-button
-          > -->
-            <el-button type="primary" size="mini" @click="editBk(k)"
-              >编辑</el-button
-            >
-            <el-popconfirm
-              title="确定要删除本条数据?"
-              @confirm="handleDelete(k)"
-            >
-              <template #reference>
-                <el-button size="mini" type="danger">删除</el-button>
-              </template>
-            </el-popconfirm>
+          <div class="foot">
+            <span>发布时间:</span>
+            <span>{{ k.date }}</span>
+            <div class="shu">|</div>
+            <span>浏览量:</span>
+            <span>{{ k.visitor || 0 }}</span>
           </div>
         </div>
-        <div class="foot">
-          <span>发布时间:</span>
-          <span>{{ k.date }}</span>
-          <div class="shu">|</div>
-          <span>浏览量:</span>
-          <span>{{ k.visitor || 0 }}</span>
+        <div class="page">
+          <el-pagination
+            background
+            @size-change="handleSizeChange"
+            @current-change="handlePageChange"
+            :current-page="page"
+            layout="total,prev, pager, next,sizes"
+            :total="total"
+            :page-size="list_rows"
+            :page-sizes="[10, 20, 30, 40, 50]"
+          >
+          </el-pagination>
         </div>
-      </div>
-      <div class="page">
-        <el-pagination
-          background
-          @size-change="handleSizeChange"
-          @current-change="handlePageChange"
-          :current-page="page"
-          layout="total,prev, pager, next,sizes"
-          :total="total"
-          :page-size="list_rows"
-          :page-sizes="[10, 20, 30, 40, 50]"
-        >
-        </el-pagination>
       </div>
     </div>
   </div>
@@ -73,19 +56,21 @@
 import { onMounted, reactive, toRefs } from "vue-demi";
 import pageHooks from "@/utils/pageHooks";
 import { getBkList, delBk } from "@/api/bkList";
-import { ElMessage } from "element-plus";
 import router from "@/router";
 export default {
+  
   setup() {
     const { pageParams, handlePageChange, handleSizeChange } =
       pageHooks(getList);
     async function getList() {
-      let user = JSON.parse(localStorage.getItem("user"));
+      states.loading=true;
       let res = await getBkList({
-        userId: user.id,
+        userId: 1,
         page: states.page,
         pageSize: states.list_rows,
         keyWord: states.val,
+      }).finally(()=>{
+        states.loading=false
       });
       states.tableData = res.data.data;
       states.total = res.data.total;
@@ -98,35 +83,23 @@ export default {
       ...toRefs(pageParams),
       val: "",
       tableData: [],
+      loading:false
     });
-    let handleDelete = async (item) => {
-      console.log(item);
-      let res = await delBk({ id: item.id });
-      states.page = 1;
-      ElMessage({
-        type: "success",
-        message: "删除成功!",
-      });
-      getList();
-    };
+    let itemDetail=(item)=>{
+      router.push({name:"addBk",query:{id:item.id}})
+    }
     let search = () => {
       states.page = 1;
       getList();
     };
-    let addBk = () => {
-      router.push("/addBk");
-    };
-    let editBk = (item) => {
-      router.push({ path: "/addBk", query: { id: item.id } });
-    };
+   
     return {
       ...toRefs(states),
       handlePageChange,
       handleSizeChange,
-      handleDelete,
+      itemDetail,
       search,
-      addBk,
-      editBk,
+     
     };
   },
 };
@@ -134,35 +107,42 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+  height: 100%;
+  width: 100%;
   .search {
     display: flex;
-    background: white;
     padding: 10px;
+    background-color: white;
+    box-shadow: 1px 1px 10px #5f5f5f;
   }
-  .addBtn {
-    text-align: right;
-    margin-top: 20px;
+  .midSection {
+    width: 800px;
+    height: 100%;
+    margin: auto;
+    padding: 15px;
   }
   .table {
     width: 100%;
     margin-top: 10px;
-    background: white;
-    box-shadow: 0 0 3px white;
-    padding: 10px;
     margin-top: 20px;
 
     .item {
+      background-color: white;
+      box-shadow: 1px 1px 10px #5f5f5f;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
       .foot {
-        background-color: black;
+        background-color: #7f90bd;
         width: 100%;
         padding-left: 20px;
-        .shu{
+        .shu {
           padding-left: 5px;
           padding-right: 5px;
           display: inline-block;
           color: white;
         }
-        span{
+        span {
           color: white;
           font-size: 14px;
         }
@@ -188,7 +168,7 @@ export default {
           }
         }
         .content {
-          width: calc(100% - 340px);
+          width: calc(100% - 140px);
           .title {
             font-size: 16px;
             font-weight: 600;
@@ -207,10 +187,6 @@ export default {
             }
           }
         }
-        .options {
-          width: 200px;
-          margin-left: 20px;
-        }
       }
     }
     .item:not(:last-child) {
@@ -220,6 +196,9 @@ export default {
   .page {
     margin-top: 10px;
     text-align: right;
+    // background-color: white;
+    // box-shadow: 1px 1px 10px #5f5f5f;
+    // padding: 10px;
   }
 }
 </style>

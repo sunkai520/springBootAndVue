@@ -18,13 +18,13 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/imsList/index.vue')
       },
       {
-        path:"/users",
-        name:"users",
-        component:()=>import('@/views/users/index.vue')
-      },{
-        path:"/addBk",
-        name:"addBk",
-        component:()=>import('@/views/addBk/index.vue')
+        path: "/users",
+        name: "users",
+        component: () => import('@/views/users/index.vue')
+      }, {
+        path: "/addBk",
+        name: "addBk",
+        component: () => import('@/views/addBk/index.vue')
       }
     ]
   },
@@ -43,6 +43,18 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+router.beforeEach((to, from, next) => {
+  if (to.path == "/login") {
+    next()
+  }else{
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    if(!token||!user){
+      next({ path: "/login" })
+    }
+  }
+  next()
 })
 // router.beforeEach((to, from, next) => {
 //   store.commit("SET_ROUTERURL", to.name)
@@ -92,7 +104,7 @@ const router = createRouter({
 //   }
 //   const userInfo= JSON.parse(localStorage.getItem("userInfo") as any);
 
- 
+
 //   if (to.path != "/login") {
 //       const bool = validateToken();
 //       if (!bool || !userInfo) {
