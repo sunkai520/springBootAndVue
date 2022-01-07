@@ -2,8 +2,8 @@
   <div class="login">
     <start-back></start-back>
     <div class="loginForm">
-      <div class="title">xxxxxxxxx</div>
-      <div class="subTitle">xxxxxxxxx</div>
+      <div class="title">博客后台管理</div>
+      <div class="subTitle">博客</div>
       <el-form
         ref="rform"
         :model="ruleForm"

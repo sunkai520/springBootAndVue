@@ -1,7 +1,6 @@
 package com.sunkai.test.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -28,12 +27,12 @@ import java.util.Map;
 
 public class BklistController {
     @Autowired
-    IBklistService service;
+    IBklistService iBklistService;
     @RequestMapping(value = "/createBk",method = RequestMethod.POST)
     public Result createBk(@RequestBody Bklist bklist){
         bklist.setDate(new Date());
         bklist.setVisitor(0);
-        Boolean bool = service.save(bklist);
+        Boolean bool = iBklistService.save(bklist);
         Result result = new Result();
         return  result;
     }
@@ -50,7 +49,7 @@ public class BklistController {
 //        queryWrapper.like("des",keyWord);
         queryWrapper.and(wrapper->wrapper.like("title",keyWord).or().like("des",keyWord));
         Page page = new Page(mpage,pageSize);
-        IPage pageMaps = service.pageMaps(page,queryWrapper);
+        IPage pageMaps = iBklistService.pageMaps(page,queryWrapper);
         Long total = pageMaps.getTotal();
         List data = pageMaps.getRecords();
         Map map = new HashMap();
@@ -65,7 +64,7 @@ public class BklistController {
     public Result delBk(@RequestBody Map map){
         Result result = new Result();
         Integer id = Integer.parseInt(map.get("id").toString());
-        Boolean bool = service.removeById(id);
+        Boolean bool = iBklistService.removeById(id);
         if(!bool){
             result.setCode(201);
             result.setMsg("删除失败!");
@@ -76,7 +75,7 @@ public class BklistController {
     public  Result getBkInfo(@RequestBody Map map){
         Result result  = new Result();
         Integer id = Integer.parseInt(map.get("id").toString());
-        Bklist bklist = service.getById(id);
+        Bklist bklist = iBklistService.getById(id);
 
         if(bklist!=null){
             if(bklist.getText()==null){
@@ -92,7 +91,7 @@ public class BklistController {
     @RequestMapping(value="/updateBk",method = RequestMethod.POST)
     public  Result updateUserInfo(@RequestBody Bklist bklist){
         Result result = new Result();
-        Boolean bool =  service.updateById(bklist);
+        Boolean bool =  iBklistService.updateById(bklist);
         if(bool){
             result.setCode(200);
             result.setMsg("更新成功");

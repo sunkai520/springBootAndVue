@@ -1,4 +1,4 @@
-package com.sunkai.test.service.impl;
+package com.sunkai.test.service.Impl;
 
 import com.sunkai.test.bean.Bklist;
 import com.sunkai.test.mapper.BklistMapper;
