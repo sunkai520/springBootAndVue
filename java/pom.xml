@@ -73,7 +73,12 @@
             <artifactId>java-jwt</artifactId>
             <version>3.10.3</version>
         </dependency>
-
+        <!-- 高性能json工具包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
     </dependencies>
     <!--maven打包jar包配置-->
     <build>

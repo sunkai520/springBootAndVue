@@ -1,11 +1,6 @@
 package com.sunkai.test.utils;
-
-import org.springframework.boot.system.ApplicationHome;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 

@@ -29,7 +29,7 @@ export default {
         {
           name: "bk设置",
           expand: false,
-          childrens: [{ name: "bk列表", path: "imsList",code:"imsList"}],
+          childrens: [{ name: "bk列表", path: "/",code:"/"},{name:"tags列表",path:"tags",code:"tags"}],
         },
         {
           name: "系统管理",

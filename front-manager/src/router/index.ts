@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/home/index.vue')
       },
       {
-        path: '/imsList',
+        path: '/',
         name: 'imsList',
         component: () => import('@/views/imsList/index.vue')
       },
@@ -21,10 +21,16 @@ const routes: Array<RouteRecordRaw> = [
         path: "/users",
         name: "users",
         component: () => import('@/views/users/index.vue')
-      }, {
+      },
+      {
         path: "/addBk",
         name: "addBk",
         component: () => import('@/views/addBk/index.vue')
+      },
+      {
+        path: "/tags",
+        name: "tags",
+        component: () => import('@/views/tags/index.vue')
       }
     ]
   },

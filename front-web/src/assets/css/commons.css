@@ -7,9 +7,9 @@ html {
 }
 
 #app {
-    height: 100%;
     width: 100%;
     background: #f6f8fb;
+    min-height: 100%;
 }
 
 body {

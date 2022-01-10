@@ -1,14 +1,15 @@
 <template>
   <div class="list">
+    
     <div class="midSection">
       <div class="search">
         <div style="margin-right: 20px">
-          <el-input v-model="val" placeholder="请输入关键词" />
+          <el-input v-model="val" placeholder="请输入关键词" clearable/>
         </div>
         <el-button type="primary" size="mini" @click="search">查询</el-button>
       </div>
-      <div class="table" v-loading="loading">
-        <div class="item" v-for="(k, index) in tableData" :key="index" @click="itemDetail(k)">
+      <div class="table" v-loading="loading" v-if="tableData.length>0">
+        <div class="item" v-for="(k, index) in tableData" :key="index" @click="itemDetail(k)" >
           <div class="card">
             <div class="imgg">
               <el-image :src="'api/' + k.imageUrl">
@@ -48,6 +49,15 @@
           </el-pagination>
         </div>
       </div>
+      <div v-else class="noData">
+        暂无数据
+      </div>
+    </div>
+    <div class="rightSection">
+      <div v-if="cloudList.length>0">
+        <div class="tt"><span>标签云</span></div>
+        <CloudWork :data ="cloudList" @search="cloudSearch"></CloudWork>
+      </div>
     </div>
   </div>
 </template>
@@ -55,10 +65,11 @@
 <script>
 import { onMounted, reactive, toRefs } from "vue-demi";
 import pageHooks from "@/utils/pageHooks";
-import { getBkList, delBk } from "@/api/bkList";
+import { getBkList,getTagsList} from "@/api/bkList";
 import router from "@/router";
+import CloudWork from "@/components/cloudWork.vue"
 export default {
-  
+  components:{CloudWork},
   setup() {
     const { pageParams, handlePageChange, handleSizeChange } =
       pageHooks(getList);
@@ -78,12 +89,19 @@ export default {
     }
     onMounted(() => {
       getList();
+      getTagList()
+
     });
+    async function getTagList(){
+      let res = await getTagsList({keyWord:""});
+      states.cloudList = res.data
+    }
     let states = reactive({
       ...toRefs(pageParams),
       val: "",
       tableData: [],
-      loading:false
+      loading:false,
+      cloudList:[]
     });
     let itemDetail=(item)=>{
       router.push({name:"addBk",query:{id:item.id}})
@@ -92,13 +110,17 @@ export default {
       states.page = 1;
       getList();
     };
-   
+   let cloudSearch=(item)=>{
+     states.val=item.tagName;
+     search()
+   }
     return {
       ...toRefs(states),
       handlePageChange,
       handleSizeChange,
       itemDetail,
       search,
+      cloudSearch
      
     };
   },
@@ -109,6 +131,7 @@ export default {
 .list {
   height: 100%;
   width: 100%;
+  position: relative;
   .search {
     display: flex;
     padding: 10px;
@@ -118,8 +141,33 @@ export default {
   .midSection {
     width: 800px;
     height: 100%;
-    margin: auto;
     padding: 15px;
+    margin: auto;
+  }
+  .rightSection{
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    overflow: hidden;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px #5f5f5f;
+    .tt{
+      border-left: 5px solid #2950b8;
+      span{
+        font-size: 18px;
+        font-weight: 600;
+        padding-left: 5px;
+      }
+    }
+  }
+  .noData{
+    text-align: center;
+    margin-top: 50px;
+    color: gray;
+    font-size: 18px;
+    font-weight: 600;
   }
   .table {
     width: 100%;

@@ -73,7 +73,7 @@ export default {
         if (valid) {
           let res = await login(states.ruleForm);
           if(res.code==200){
-            router.push("/firstPage")
+            router.push("/")
             localStorage.setItem("token",res.data.token)
             localStorage.setItem("user",JSON.stringify(res.data))
           }else{

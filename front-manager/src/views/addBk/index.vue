@@ -20,6 +20,21 @@
             autosize
           ></el-input>
         </el-form-item>
+        <!-- <el-form-item label="tag" prop="tag">
+          <el-select
+            v-model="ruleForm.tagss"
+            multiple
+            placeholder="请选择tag"
+          >
+            <el-option
+              v-for="item in tagOptions"
+              :key="item.id"
+              :label="item.tagName"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item> -->
         <!-- <el-form-item label="代码" prop="code">
           <el-input
             v-model="ruleForm.code"
@@ -45,7 +60,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="内容">
-          <div style="height:500px">
+          <div style="height: 500px">
             <MdEditor
               v-model="ruleForm.text"
               @onUploadImg="onUploadImg"
@@ -74,6 +89,7 @@ import { useRoute } from "vue-router";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import axios from "axios";
+import {getTagsList} from "@/api/tags"
 export default {
   components: { MdEditor },
   setup(props) {
@@ -85,16 +101,27 @@ export default {
         des: "",
         imageUrl: "",
         text: "",
+        // tagss:[]
       },
       id: id,
       rules: [],
-      pageFullScreen:false
+      pageFullScreen: false,
+      tagOptions:[]
     });
     onMounted(() => {
       if (states.id) {
         getOneBkInfo();
       }
+      getList()
     });
+     async function getList() {
+      let params = {
+        keyWord: "",
+      };
+      let res = await getTagsList(params)
+      states.tagOptions = res.data;
+      
+    }
     let submitForm = async () => {
       console.log(states.ruleForm, "???");
       if (states.id) {
@@ -112,7 +139,7 @@ export default {
         type: "success",
         message: "保存成功!",
       });
-      router.push("/imsList");
+      router.push("/");
     };
     let beforeAvatarUpload = (file) => {
       let size = file.size / 1024 / 1024;
@@ -159,17 +186,17 @@ export default {
       console.log(res, "res");
       callback(res.map((item) => "api/" + item.data));
     };
-    let save = ()=>{
-      states.pageFullScreen=false;
-      submitForm()
-    }
+    let save = () => {
+      states.pageFullScreen = false;
+      submitForm();
+    };
     return {
       ...toRefs(states),
       submitForm,
       beforeAvatarUpload,
       handleAvatarSuccess,
       onUploadImg,
-      save
+      save,
     };
   },
 };

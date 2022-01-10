@@ -1,9 +1,9 @@
 package com.sunkai.test.bean;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +19,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Bklist implements Serializable {
-
     private static final long serialVersionUID = 1L;
     private String title;
     private String des;
@@ -28,6 +27,9 @@ public class Bklist implements Serializable {
     private Integer userid;
     private String imageUrl;
     private String text;
-    private Date date;
+    private String date;
     private Integer visitor;
+//    private String tags;
+//    @TableField(exist = false)
+//    private Object tagss;
 }
