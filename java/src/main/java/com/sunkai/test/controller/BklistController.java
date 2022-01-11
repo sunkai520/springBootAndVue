@@ -1,7 +1,6 @@
 package com.sunkai.test.controller;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -34,7 +33,7 @@ public class BklistController {
         //处理前端传过来的数组
 //        bklist.setTags(JSONObject.toJSONString(bklist.getTagss()));
         Date d = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         bklist.setDate(dateFormat.format(d));
         bklist.setVisitor(0);
         Boolean bool = iBklistService.save(bklist);

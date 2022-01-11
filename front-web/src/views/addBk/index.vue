@@ -50,7 +50,6 @@ export default {
   padding: 15px;
   .cxt {
     width: 800px;
-    height: 100%;
     margin: auto;
     background-color: white;
     box-shadow: 1px 1px 10px #5f5f5f;

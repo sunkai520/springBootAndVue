@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="header">
-      <div class="tit">博客后台管理</div>
+      <div class="tit">blog后台管理</div>
       <div class="setting">
         <div class="out" @click="loginOut">
           <i class="iconfont">&#xe634;</i>

@@ -15,7 +15,7 @@
               <el-image :src="'api/' + k.imageUrl">
                 <template #error>
                   <div class="image-slot">
-                    <img src="../../../src/assets/img/default.png" />
+                    <img :src="getImg(k)" />
                   </div>
                 </template>
               </el-image>
@@ -44,7 +44,7 @@
             layout="total,prev, pager, next,sizes"
             :total="total"
             :page-size="list_rows"
-            :page-sizes="[10, 20, 30, 40, 50]"
+            :page-sizes="[5,10, 20, 30, 40, 50]"
           >
           </el-pagination>
         </div>
@@ -88,6 +88,7 @@ export default {
       console.log(res, "res");
     }
     onMounted(() => {
+      states.list_rows=5;
       getList();
       getTagList()
 
@@ -114,14 +115,38 @@ export default {
      states.val=item.tagName;
      search()
    }
+   let getImg = (item)=>{
+     console.log(item,"item")
+     let title = item.title;
+     if(title.includes("java")){
+       return require("../../../src/assets/img/java.webp")
+     }
+     if(title.includes("js")){
+       return require("../../../src/assets/img/js.jpg")
+     }
+     if(title.includes("linux")){
+       return require("../../../src/assets/img/linux.jpg")
+     }
+     if(title.includes("node")){
+       return require("../../../src/assets/img/node.jpg")
+     }
+     if(title.includes("springboot")){
+       return require("../../../src/assets/img/springboot.jpg")
+     }
+      if(title.includes("vue")){
+       return require("../../../src/assets/img/vue.jpg")
+     }
+     let defaul = require("../../../src/assets/img/default.png")
+     return defaul
+   }
     return {
       ...toRefs(states),
       handlePageChange,
       handleSizeChange,
       itemDetail,
       search,
-      cloudSearch
-     
+      cloudSearch,
+      getImg
     };
   },
 };
@@ -139,7 +164,7 @@ export default {
     box-shadow: 1px 1px 10px #5f5f5f;
   }
   .midSection {
-    width: 800px;
+    width: 700px;
     height: 100%;
     padding: 15px;
     margin: auto;
@@ -153,6 +178,8 @@ export default {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 1px 1px 10px #5f5f5f;
+    //  background: url("../../assets/img/bk.png") no-repeat;
+    //  background-size: 100% 100%;
     .tt{
       border-left: 5px solid #2950b8;
       span{
@@ -169,6 +196,10 @@ export default {
     font-size: 18px;
     font-weight: 600;
   }
+  .image-slot{
+    height: 100%;
+    width: 100%;
+  }
   .table {
     width: 100%;
     margin-top: 10px;
@@ -181,7 +212,7 @@ export default {
       border-radius: 5px;
       cursor: pointer;
       .foot {
-        background-color: #7f90bd;
+        background-color: #466dd6;
         width: 100%;
         padding-left: 20px;
         .shu {

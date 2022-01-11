@@ -44,7 +44,7 @@ export default {
     },
   },
   data: () => ({
-    color: ["#2D4DB6", "#04B67C", "#D1AF07", "#E27914", "#CB4A4D", "#B02690"],
+    color: ["#2D4DB6", "#04B67C", "#D1AF07", "#E27914", "#CB4A4D", "#B02690","#d80ec8","#2493bd"],
     contentEle: [],
     direction: "-1",
     speed: 400,
@@ -173,6 +173,7 @@ button {
   margin: 10px auto;
   position: relative;
   cursor: pointer;
+ 
 }
 
 .wordCloud__tag {

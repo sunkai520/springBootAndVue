@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <div class="header">
-      <div class="tit">个人博客/技术博客</div>
+      <div class="tit">blog</div>
       <div class="menu">
         <span @click="goHome">首页</span>
-        <span class="shu">/</span>
-        <span @click="goMe">关于我</span>
+        <!-- <span class="shu">/</span>
+        <span @click="goMe">关于我</span> -->
       </div>
     </div>
     <div class="ct">
@@ -79,6 +79,7 @@ export default {
   }
   .ct {
     height: calc(100% - 60px);
+    overflow: auto;
     > div {
       display: inline-block;
       vertical-align: top;
@@ -90,7 +91,9 @@ export default {
     .content {
       width: 100%;
       height: 100%;
+      // background: url("../assets/img/bk.png");
     }
   }
+  
 }
 </style>
