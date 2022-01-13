@@ -1,6 +1,7 @@
 <template>
   <div class="addBk">
     <div class="cxt">
+      <div class="title"><h2>{{ruleForm.title}}</h2></div>
       <MdEditor v-model="ruleForm.text" previewOnly></MdEditor>
     </div>
   </div>
@@ -55,6 +56,10 @@ export default {
     box-shadow: 1px 1px 10px #5f5f5f;
     padding: 10px;
     border-radius: 5px;
+    .title{
+      text-align: center;
+      color: #466ca5;
+    }
   }
 }
 </style>

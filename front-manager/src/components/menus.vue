@@ -29,14 +29,12 @@ export default {
         {
           name: "bk设置",
           expand: false,
-          childrens: [{ name: "bk列表", path: "/",code:"/"},{name:"tags列表",path:"tags",code:"tags"}],
+          childrens: [
+            { name: "bk列表", path: "/", code: "/" },
+            { name: "tags列表", path: "tags", code: "tags" },
+          ],
         },
-        {
-          name: "系统管理",
-          expand: false,
-          childrens: [{ name: "用户信息", path: "users",code:"users"}],
-        },
-        { name: "权限管理", expand: false, childrens: [{ name: "角色管理" }] },
+        // { name: "权限管理", expand: false, childrens: [{ name: "角色管理" }] },
       ],
     });
     let clickItem = (item) => {
@@ -51,6 +49,14 @@ export default {
     };
     onMounted(() => {
       setMenuStates(router.currentRoute.value.name, true);
+      let user = JSON.parse(localStorage.getItem("user"));
+      if (user.id == 1) {
+        states.menus.push({
+          name: "系统管理",
+          expand: false,
+          childrens: [{ name: "用户信息", path: "users", code: "users" }],
+        });
+      }
     });
     function setMenuStates(name = "", bool = false) {
       states.menus.forEach((menu) => {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/homeIndex.vue'
+import Home from '../views/home/index.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,15 +13,20 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/imsList/index.vue')
       },
       {
-        path: "/addBk",
-        name: "addBk",
-        component: () => import('@/views/addBk/index.vue')
+        path: "/detail",
+        name: "detail",
+        component: () => import('@/views/detail/index.vue')
       },
 
       {
         path: '/myCurriculum',
         name: 'myCurriculum',
         component: () => import('@/views/myCurriculum/index.vue')
+      },
+      {
+        path: '/mePage',
+        name: 'mePage',
+        component: () => import('@/views/mePage/index.vue')
       }
     ]
   },
