@@ -24,9 +24,9 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/myCurriculum/index.vue')
       },
       {
-        path: '/mePage',
-        name: 'mePage',
-        component: () => import('@/views/mePage/index.vue')
+        path: '/aboutMe',
+        name: 'aboutMe',
+        component: () => import('@/views/aboutMe/index.vue')
       }
     ]
   },

@@ -4,8 +4,10 @@
       <div class="tit">Blog</div>
       <div class="menu">
         <span @click="go('/')"><i class="iconfont">&#xe699;</i>首页</span>
-        <span @click="go('/mePage')"><i class="iconfont"> &#xe691;</i>关于我</span>
-         <span @click="goManager"><i class="iconfont">&#xe60a;</i>后台</span>
+        <span @click="go('/aboutMe')"
+          ><i class="iconfont"> &#xe691;</i>关于我</span
+        >
+        <span @click="goManager"><i class="iconfont">&#xe60a;</i>后台</span>
         <!-- <span class="shu">/</span>
         <span @click="goMe">关于我</span> -->
       </div>
@@ -21,10 +23,10 @@
 <script>
 import { reactive, toRefs } from "vue-demi";
 import router from "@/router";
-import MePage from "@/views/mePage"
+import MePage from "@/views/mePage";
 export default {
-  components:{
-    MePage
+  components: {
+    MePage,
   },
   setup() {
     let loginOut = () => {
@@ -33,18 +35,18 @@ export default {
       router.replace("/login");
     };
     let states = reactive({});
-    let go = (url)=>{
-      router.push(url)
-    }
-    let goManager=()=>{
-      window.open('http://39.105.30.33:8081')
-    }
+    let go = (url) => {
+      router.push(url);
+    };
+    let goManager = () => {
+      window.open("http://39.105.30.33:8081");
+    };
 
     return {
       ...toRefs(states),
       loginOut,
       goManager,
-      go
+      go,
     };
   },
 };
@@ -73,21 +75,24 @@ export default {
       font-weight: 600;
       font-size: 20px;
       position: absolute;
+      background: linear-gradient(to right, red 30%, white 100%);
+      -webkit-background-clip: text;
+      color: transparent;
     }
     .menu {
       color: white;
-      .shu{
+      .shu {
         padding-left: 5px;
         padding-right: 5px;
       }
-      span{
+      span {
         cursor: pointer;
         font-size: 14px;
       }
-      span:not(:last-child){
+      span:not(:last-child) {
         margin-right: 20px;
       }
-      .iconfont{
+      .iconfont {
         padding-right: 5px;
       }
     }
@@ -109,10 +114,9 @@ export default {
       width: 100%;
       height: 100%;
       overflow: auto;
-      min-width: 1440px
+      min-width: 1440px;
       // background: url("../assets/img/bk.jpg");
     }
   }
-  
 }
 </style>
