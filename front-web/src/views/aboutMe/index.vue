@@ -4,7 +4,7 @@
       <div v-for="(k, index) in dataList" class="item" :key="index" ref="item">
         <div class="ct">
           <div class="title">网页设计之路</div>
-          <img :src="k.url" />
+          <img :src="k.url" @load="lodImg"/>
           <div class="des">
             <p>一个默默无闻不断坚持的网站，分享好作品，传递正能量！</p>
           </div>
@@ -32,21 +32,31 @@ export default {
         { url: require("../../assets/img/linux.jpg") },
         { url: require("../../assets/img/head.png") },
       ],
+      imgLoad:[]
     });
 
     onMounted(() => {
       let aboutme = document.querySelector(".aboutMe");
-      waterFall(aboutme, 5);
-      window.onload = function () {
-        waterFall(aboutme, 5);
-      };
       window.onresize = function () {
         waterFall(aboutme, 5);
       };
     });
+    //因为图片是异步加载会导致js计算瀑布流时获取高度失效,所以要确保所有图片加载完毕后进行瀑布流的计算
+    let lodImg = function(e){
+      if(e.target.height){
+        states.imgLoad.push(1)
+      }else{
+        states.imgLoad.push(2)
+        console.log("未获得图片高度")
+      }
+      if(states.imgLoad.length==states.dataList.length&&!states.imgLoad.includes(2)){
+        waterFall(document.querySelector(".aboutMe"), 5);
+      }
+    }
     return {
       ...toRefs(states),
       item,
+      lodImg
     };
   },
 };
@@ -68,6 +78,7 @@ export default {
       background: white;
       img {
         width: 100%;
+        height: 100%;
       }
       .title {
         color: #2950b8;

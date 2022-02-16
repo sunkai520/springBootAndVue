@@ -17,6 +17,7 @@
       <div class="content">
         <router-view></router-view>
       </div>
+      
     </div>
   </div>
 </template>
@@ -39,7 +40,7 @@ export default {
       router.push(url);
     };
     let goManager = () => {
-      window.open("http://39.105.30.33:8081");
+      window.open("http://sunkaibk.xyz:8081");
     };
 
     return {

@@ -19,6 +19,7 @@ export function waterFall(initDom,culumns) {
         let dom = items[i];
         let cc = dom.querySelector(".ct");
         let img = cc.querySelector("img");
+        console.log(img.height,"图片的高度为:")
         if (img.height == 0) {
             return
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="list">
-    <div class="midSection">
-      <div class="table" v-loading="loading" v-if="tableData.length > 0">
+    <div class="midSection" v-loading="loading">
+      <div class="table" v-if="tableData.length > 0">
         <div
           class="item"
           v-for="(k, index) in tableData"
@@ -48,6 +48,7 @@
         </div>
       </div>
       <div v-else class="noData">暂无数据</div>
+    
     </div>
     <div class="rightSection">
       <div v-if="cloudList.length > 0">
@@ -106,6 +107,10 @@ export default {
       cloudList: [],
     });
     let itemDetail = (item) => {
+      
+      // let params = item
+      // params.visitor=(params.visitor||0)+1
+      // console.log(params.visitor,"item")
       router.push({ name: "detail", query: { id: item.id } });
     };
     let search = () => {
@@ -155,7 +160,7 @@ export default {
 
 <style lang="scss" scoped>
 .list {
-  height: 100%;
+  // height: 100%;
   width: 100%;
   position: relative;
   .search {
@@ -280,5 +285,6 @@ export default {
     // box-shadow: 1px 1px 10px #5f5f5f;
     // padding: 10px;
   }
+
 }
 </style>

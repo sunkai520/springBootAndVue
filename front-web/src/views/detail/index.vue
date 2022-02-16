@@ -1,6 +1,6 @@
 <template>
   <div class="addBk">
-    <div class="cxt">
+    <div class="cxt" v-loading="loading">
       <div class="title"><h2>{{ruleForm.title}}</h2></div>
       <MdEditor v-model="ruleForm.text" previewOnly></MdEditor>
     </div>
@@ -27,6 +27,7 @@ export default {
         text: "",
       },
       id: id,
+      loading:false
     });
     onMounted(() => {
       if (states.id) {
@@ -34,7 +35,10 @@ export default {
       }
     });
     async function getOneBkInfo() {
-      let res = await getBkInfo({ id: states.id });
+      states.loading = true;
+      let res = await getBkInfo({ id: states.id }).finally(()=>{
+        states.loading=false;
+      });
       states.ruleForm = res.data;
     }
     return {

@@ -10,6 +10,9 @@
         <div class="des">程序猿 / 轻随笔 / 轻生活 / 轻日记 / 轻梦想</div>
         <div class="zy">一份耕耘,一份收获</div>
       </div>
+      <div class="beian">
+        <a href="https://beian.miit.gov.cn">鲁ICP备2022001968号-1</a>
+      </div>
     </div>
   </div>
 </template>
@@ -72,6 +75,14 @@ export default {
       color: white;
       text-align: center;
      
+    }
+  }
+  .beian{
+    margin-top: 60px;
+    text-align: center;
+    a{
+      color: white;
+      font-size: 14px;
     }
   }
 }
