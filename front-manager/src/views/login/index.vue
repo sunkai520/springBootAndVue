@@ -42,6 +42,9 @@
         </el-form-item>
       </el-form>
     </div>
+    <div class="bian">
+      <a href="https://beian.miit.gov.cn">鲁ICP备2022001968号-1</a>
+    </div>
   </div>
 </template>
 
@@ -129,6 +132,15 @@ export default {
   }
   .iconfont {
     font-size: 18px;
+  }
+  .bian{
+    position: absolute;
+    bottom: 3px;
+    text-align: center;
+    width: 100%;
+    a{
+      color: #798b9e;
+    }
   }
 }
 </style>
