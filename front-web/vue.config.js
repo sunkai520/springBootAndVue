@@ -21,13 +21,13 @@ module.exports = {
             maskIcon: 'favicon.ico',
             msTileImage: 'favicon.ico',
         }
+    },
+    css: {
+        loaderOptions: {
+            scss: {
+                prependData: `@import "@/assets/css/public.scss";`
+            },
+        }
     }
-    // css: {
-    //     loaderOptions: {
-    //         scss: {
-    //             prependData: `@import "@/commons/public.scss";`
-    //         },
-    //     }
-    // }
 
 };

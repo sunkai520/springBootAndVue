@@ -1,5 +1,5 @@
 <template>
-  <div class="me">
+  <div class="me" :class="load ? 'load' : ''">
     <div class="leftSection">
       <div class="avatar">
         <img :src="src" alt="" @mouseover="mover" @mouseout="mout" />
@@ -19,10 +19,12 @@
 
 <script>
 import { reactive, toRefs } from "@vue/reactivity";
+import { onMounted } from "@vue/runtime-core";
 export default {
   setup() {
     let states = reactive({
       src: require("../../assets/img/head.png"),
+      load: false,
     });
     let mover = () => {
       states.src = require("../../assets/img/head.jpg");
@@ -30,6 +32,11 @@ export default {
     let mout = () => {
       states.src = require("../../assets/img/head.png");
     };
+    onMounted(() => {
+      window.onload = () => {
+        states.load = true;
+      };
+    });
     return {
       ...toRefs(states),
       mover,
@@ -40,12 +47,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.load {
+  left: 0 !important;
+}
 .me {
   position: absolute;
-  left: 0;
   top: 0;
   height: 100%;
   z-index: 888;
+  left: -350px;
+  transition: left 1s;
   .leftSection {
     width: 350px;
     height: 100%;
@@ -74,13 +85,12 @@ export default {
     .zy {
       color: white;
       text-align: center;
-     
     }
   }
-  .beian{
+  .beian {
     margin-top: 60px;
     text-align: center;
-    a{
+    a {
       color: white;
       font-size: 14px;
     }

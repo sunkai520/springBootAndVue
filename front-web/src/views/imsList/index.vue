@@ -8,7 +8,7 @@
           :key="index"
           @click="itemDetail(k)"
         >
-          <div class="card">
+          <div class="card goLink">
             <div class="imgg">
               <el-image :src="'api/' + k.imageUrl">
                 <template #error>
@@ -28,9 +28,9 @@
           <div class="foot">
             <span>发布时间:</span>
             <span>{{ k.date }}</span>
-            <div class="shu">|</div>
+            <!-- <div class="shu">|</div>
             <span>浏览量:</span>
-            <span>{{ k.visitor || 0 }}</span>
+            <span>{{ k.visitor || 0 }}</span> -->
           </div>
         </div>
         <div class="page">
@@ -140,9 +140,9 @@ export default {
         return require("../../../src/assets/img/springboot.jpg");
       }
       if (title.includes("vue")) {
-        return require("../../../src/assets/img/vue.jpg");
+        return require("../../../src/assets/img/vue.webp");
       }
-      let defaul = require("../../../src/assets/img/default.png");
+      let defaul = require("../../../src/assets/img/default.webp");
       return defaul;
     };
     return {

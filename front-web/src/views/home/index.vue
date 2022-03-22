@@ -2,12 +2,12 @@
   <div class="home">
     <div class="header">
       <div class="tit">Blog</div>
-      <div class="menu">
-        <span @click="go('/')"><i class="iconfont">&#xe699;</i>首页</span>
-        <span @click="go('/aboutMe')"
+      <div class="menu" >
+        <span @click="go('/')" class="textHov"><i class="iconfont">&#xe699;</i>首页</span>
+        <span @click="go('/aboutMe')" class="textHov"
           ><i class="iconfont"> &#xe691;</i>关于我</span
         >
-        <span @click="goManager"><i class="iconfont">&#xe60a;</i>后台</span>
+        <span @click="goManager" class="textHov"><i class="iconfont">&#xe60a;</i>后台</span>
         <!-- <span class="shu">/</span>
         <span @click="goMe">关于我</span> -->
       </div>

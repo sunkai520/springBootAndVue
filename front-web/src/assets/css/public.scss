@@ -1,0 +1,28 @@
+$primary:red;
+//可点击列表公共样式
+.goLink {
+        &:hover {
+                .title {
+                        color: #2950B8;
+                        text-decoration: underline;
+                }
+
+                img {
+                        transform: rotateX(180deg);
+                }
+        }
+
+        img {
+                transition: all 2s ease;
+                transform: rotateX(0);
+        }
+
+}
+.textHov{
+        &:hover{
+                background: linear-gradient(to right, $primary 30%, white 100%);
+                -webkit-background-clip: text;
+                color: transparent;
+                font-weight: 600;
+        }
+}
