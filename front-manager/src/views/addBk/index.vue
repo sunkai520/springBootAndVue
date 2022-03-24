@@ -61,6 +61,9 @@
         </el-form-item>
         <el-form-item label="内容">
           <div style="height: 500px">
+            <div class="cor">
+              <div class="rd" @click="setColor(k)" v-for="(k,index) in colors" :key="index" :style="'background-color:'+k"></div>
+            </div>
             <MdEditor
               v-model="ruleForm.text"
               @onUploadImg="onUploadImg"
@@ -106,7 +109,8 @@ export default {
       id: id,
       rules: [],
       pageFullScreen: false,
-      tagOptions:[]
+      tagOptions:[],
+      colors:["red","blue","yellow"]
     });
     onMounted(() => {
       if (states.id) {
@@ -156,7 +160,9 @@ export default {
     let handleAvatarSuccess = (res) => {
       states.ruleForm.imageUrl = res.data;
     };
-
+    let setColor = (d)=>{
+      states.ruleForm.text+=`<font color=${d}></font>`
+    }
     async function getOneBkInfo() {
       let res = await getBkInfo({ id: states.id });
       states.ruleForm = res.data;
@@ -197,6 +203,7 @@ export default {
       handleAvatarSuccess,
       onUploadImg,
       save,
+      setColor
     };
   },
 };
@@ -205,6 +212,19 @@ export default {
 <style lang="scss" scoped>
 .content {
   width: 70%;
+  .cor{
+    display: flex;
+    justify-content: flex-end;
+    .rd{
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .rd:not(:first-child){
+      margin-left: 5px;
+    }
+  }
 }
 .addBk {
   background-color: white;
