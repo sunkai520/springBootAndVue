@@ -30,7 +30,16 @@ const routes: Array<RouteRecordRaw> = [
       }
     ]
   },
-
+  {
+    path: '/echarts',
+    name: 'echarts',
+    component:() => import("@/views/demos/echarts/index.vue")
+  },
+  {
+    path: '/others',
+    name: 'others',
+    component:() => import("@/views/demos/other/index.vue")
+  }
 ]
 
 const router = createRouter({

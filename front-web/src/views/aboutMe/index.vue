@@ -1,12 +1,12 @@
 <template>
   <div class="aboutMe">
     <div class="pubuliu">
-      <div v-for="(k, index) in dataList" class="item" :key="index" ref="item">
+      <div v-for="(k, index) in dataList" class="item" :key="index" ref="item" @click="goItem(k)">
         <div class="ct">
-          <div class="title">网页设计之路</div>
+          <div class="title">{{k.title||"--"}}</div>
           <img :src="k.url" @load="lodImg"/>
           <div class="des">
-            <p>一个默默无闻不断坚持的网站，分享好作品，传递正能量！</p>
+            <p>{{k.desc||"--"}}</p>
           </div>
         </div>
       </div>
@@ -18,12 +18,13 @@
 import { reactive, ref, toRefs } from "@vue/reactivity";
 import { nextTick, onMounted } from "@vue/runtime-core";
 import { waterFall } from "@/utils/pubuliu";
+import router from '@/router';
 export default {
   setup() {
     let item = ref("");
     let states = reactive({
       dataList: [
-        { url: require("../../assets/img/linux.jpg") },
+        { url: require("../../assets/img/echarts/echarts.jpg"),desc:"echarts可视化demo",title:"echarts实例",path:"/echarts"},
         { url: require("../../assets/img/head.png") },
         { url: require("../../assets/img/linux.jpg") },
         { url: require("../../assets/img/head.png") },
@@ -53,10 +54,14 @@ export default {
         waterFall(document.querySelector(".aboutMe"), 5);
       }
     }
+    let goItem = (item)=>{
+      item.path&&window.open(item.path)
+    }
     return {
       ...toRefs(states),
       item,
-      lodImg
+      lodImg,
+      goItem
     };
   },
 };
@@ -74,6 +79,7 @@ export default {
     .item {
       position: absolute;
       padding: 10px;
+      cursor: pointer;
       box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 2px;
       background: white;
       img {

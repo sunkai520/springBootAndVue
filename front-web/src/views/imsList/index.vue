@@ -1,54 +1,55 @@
 <template>
   <div class="list">
     <div class="midSection" v-loading="loading">
-      <div class="table" v-if="tableData.length > 0">
-        <div
-          class="item"
-          v-for="(k, index) in tableData"
-          :key="index"
-          @click="itemDetail(k)"
-        >
-          <div class="card goLink">
-            <div class="imgg">
-              <el-image :src="'api/' + k.imageUrl">
-                <template #error>
-                  <div class="image-slot">
-                    <img :src="getImg(k)" />
-                  </div>
-                </template>
-              </el-image>
-            </div>
-            <div class="content">
-              <div class="title">{{ k.title }}</div>
-              <div class="des">
-                <p class="p1">{{ k.des }}</p>
+      <el-scrollbar class="mid-ctx">
+        <div class="table" v-if="tableData.length > 0">
+          <div
+            class="item"
+            v-for="(k, index) in tableData"
+            :key="index"
+            @click="itemDetail(k)"
+          >
+            <div class="card goLink">
+              <div class="imgg">
+                <el-image :src="'api/' + k.imageUrl">
+                  <template #error>
+                    <div class="image-slot">
+                      <img :src="getImg(k)" />
+                    </div>
+                  </template>
+                </el-image>
+              </div>
+              <div class="content">
+                <div class="title">{{ k.title }}</div>
+                <div class="des">
+                  <p class="p1">{{ k.des }}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="foot">
-            <span>发布时间:</span>
-            <span>{{ k.date }}</span>
-            <!-- <div class="shu">|</div>
+            <div class="foot">
+              <span>发布时间:</span>
+              <span>{{ k.date }}</span>
+              <!-- <div class="shu">|</div>
             <span>浏览量:</span>
             <span>{{ k.visitor || 0 }}</span> -->
+            </div>
           </div>
         </div>
-        <div class="page">
-          <el-pagination
-            background
-            @size-change="handleSizeChange"
-            @current-change="handlePageChange"
-            :current-page="page"
-            layout="total,prev, pager, next,sizes"
-            :total="total"
-            :page-size="list_rows"
-            :page-sizes="[5, 10, 20, 30, 40, 50]"
-          >
-          </el-pagination>
-        </div>
+        <div v-else class="noData">暂无数据</div>
+      </el-scrollbar>
+      <div class="page">
+        <el-pagination
+          background
+          @size-change="handleSizeChange"
+          @current-change="handlePageChange"
+          :current-page="page"
+          layout="total,prev, pager, next,sizes"
+          :total="total"
+          :page-size="list_rows"
+          :page-sizes="[5, 10, 20, 30, 40, 50]"
+        >
+        </el-pagination>
       </div>
-      <div v-else class="noData">暂无数据</div>
-    
     </div>
     <div class="rightSection">
       <div v-if="cloudList.length > 0">
@@ -107,7 +108,6 @@ export default {
       cloudList: [],
     });
     let itemDetail = (item) => {
-      
       // let params = item
       // params.visitor=(params.visitor||0)+1
       // console.log(params.visitor,"item")
@@ -160,7 +160,7 @@ export default {
 
 <style lang="scss" scoped>
 .list {
-  // height: 100%;
+  height: 100%;
   width: 100%;
   position: relative;
   .search {
@@ -170,10 +170,13 @@ export default {
     // box-shadow: 1px 1px 10px #5f5f5f;
   }
   .midSection {
-    width: 650px;
+    width: 35%;
     height: 100%;
-    padding: 15px;
     margin: auto;
+    .mid-ctx {
+      width: 100%;
+      height: calc(100% - 50px);
+    }
   }
   .rightSection {
     position: absolute;
@@ -210,7 +213,7 @@ export default {
     width: 100%;
     margin-top: 10px;
     margin-top: 20px;
-
+    padding: 15px;
     .item {
       background-color: white;
       box-shadow: 1px 1px 10px #5f5f5f;
@@ -285,6 +288,5 @@ export default {
     // box-shadow: 1px 1px 10px #5f5f5f;
     // padding: 10px;
   }
-
 }
 </style>
