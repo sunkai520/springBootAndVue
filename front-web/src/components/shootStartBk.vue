@@ -1,3 +1,4 @@
+<!--流星雨组件-->
 <template>
   <div class="start">
     <div class="tstar" v-for="(k, ind) in 30" :key="ind"></div>

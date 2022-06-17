@@ -1,4 +1,6 @@
 module.exports = {
+    productionSourceMap:false,
+    lintOnSave: false,
     devServer: {
         proxy: {
             '/api': {

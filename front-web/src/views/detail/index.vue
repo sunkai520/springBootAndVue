@@ -1,12 +1,32 @@
 <template>
   <div class="addBk">
-    <ScollTop @scollTop="scollTop"></ScollTop>
-    <el-scrollbar class="cxt" v-loading="loading" ref="scrollbarRef" @scroll="scroll">
+    <div class="options">
+      <ScollTop @scollTop="scollTop"></ScollTop>
+      <ScollTop class="pl" @click="showAddComment"
+        ><span class="iconfont">&#xe627;</span></ScollTop
+      >
+    </div>
+    <el-scrollbar
+      class="cxt"
+      v-loading="loading"
+      ref="scrollbarRef"
+      @scroll="scroll"
+    >
       <div class="title">
         <h2>{{ ruleForm.title }}</h2>
       </div>
       <MdEditor v-model="ruleForm.text" previewOnly></MdEditor>
     </el-scrollbar>
+    <AddComment
+      :comDialogVisible="comDialogVisible"
+      @close="close"
+      v-if="comDialogVisible"
+      @commit="commit"
+    ></AddComment>
+    <div class="comment">
+      <div class="title">评论:</div>
+      <CommentList :commentList="commentsList" v-loading="commentLoading"></CommentList>
+    </div>
   </div>
 </template>
 
@@ -18,10 +38,14 @@ import { useRoute } from "vue-router";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import ScollTop from "@/components/scorllTop.vue";
+import AddComment from "@/components/addcomment.vue";
+import { createComment,getCommentList} from "@/api/comments";
+import { ElMessage } from "element-plus/lib/components";
+import CommentList from "./components/commentList/index.vue";
 export default {
-  components: { MdEditor, ScollTop },
+  components: { MdEditor, ScollTop, AddComment, CommentList },
   setup(props) {
-    let scrollbarRef = ref(null)
+    let scrollbarRef = ref(null);
     let route = useRoute();
     let id = route.query.id;
     let states = reactive({
@@ -33,10 +57,14 @@ export default {
       },
       id: id,
       loading: false,
+      comDialogVisible: false,
+      commentsList:[],
+      commentLoading:false
     });
     onMounted(() => {
       if (states.id) {
         getOneBkInfo();
+        getPlList();
       }
     });
     async function getOneBkInfo() {
@@ -46,19 +74,52 @@ export default {
       });
       states.ruleForm = res.data;
     }
+    //展示评论框
+    let showAddComment = () => {
+      states.comDialogVisible = true;
+    };
     //置顶
-    let scollTop = ()=>{
-      scrollbarRef.value.setScrollTop(0)
-    }
+    let scollTop = () => {
+      scrollbarRef.value.setScrollTop(0);
+    };
     //滚动
-    let scroll = ({scrollTop })=>{
-      console.log(scrollTop)
+    let scroll = ({ scrollTop }) => {
+      console.log(scrollTop);
+    };
+    //评论弹窗关闭
+    let close = () => {
+      states.comDialogVisible = false;
+    };
+    //提交评论
+    let commit = async (params) => {
+      close();
+      let par = {
+        ...params,
+        articleId: states.id,
+      };
+      let res = await createComment(par);
+      ElMessage.success("提交成功!");
+      getPlList();
+    };
+    //获取评论列表
+    let getPlList = async ()=>{
+      states.commentLoading = true;
+      let res = await getCommentList({
+        articleId:states.id
+      }).finally(()=>{
+        states.commentLoading =false
+      });
+      states.commentsList = res.data
+      
     }
     return {
       scollTop,
+      commit,
       ...toRefs(states),
       scrollbarRef,
-      scroll
+      scroll,
+      showAddComment,
+      close,
     };
   },
 };
@@ -70,6 +131,29 @@ export default {
   width: 100%;
   padding: 15px;
   position: relative;
+  .comment {
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+    width: 20%;
+    height: 500px;
+    .title{
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .options {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    .pl {
+      margin-top: 10px;
+      .iconfont {
+        font-size: 28px;
+      }
+    }
+  }
   .cxt {
     width: 50%;
     height: 100%;

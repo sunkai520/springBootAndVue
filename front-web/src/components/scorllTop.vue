@@ -1,7 +1,6 @@
 <template>
   <div class="scollTop noselect" @click="toTop">
-    {{text}}
-    <slot></slot>
+    <slot>{{text}}</slot>
   </div>
 </template>
 
@@ -32,9 +31,6 @@ export default {
         border-radius: 60px;
         text-align: center;
         line-height: 60px;
-        position: absolute;
-        right: 10px;
-        top: 10px;
         cursor: pointer;
         background-color: white;
         box-shadow: 0 0 6px darkgrey;
