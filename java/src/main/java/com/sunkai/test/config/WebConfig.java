@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**") //拦截所有请求
-                .excludePathPatterns("/login","/upload","/images/**","/getBkList","/getBkInfo","/error","/getTagList","/"); //除了login接口之外
+                .excludePathPatterns("/login","/upload","/images/**","/getBkList","/getBkInfo","/error","/getTagList","/","/createComment","/getCommentsList"); //排除拦截
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){

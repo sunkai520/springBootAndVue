@@ -20,7 +20,7 @@
 //                            .entity("bean"); // 更改实体类文件名若不更改默认生成entriy
 //                })
 //                .strategyConfig(builder -> {
-//                    builder.addInclude("tags")//配置依照那个表进行逆向生成代码
+//                    builder.addInclude("comments")//配置依照那个表进行逆向生成代码
 //                    .controllerBuilder().enableRestStyle()//开启@restController注解若不配置默认为controller
 //                    .entityBuilder().enableLombok()//开启@bean邮lombok管理若没有会生成setter getter方法
 //                    .mapperBuilder().enableMapperAnnotation();//mapper开启@mapper注解
