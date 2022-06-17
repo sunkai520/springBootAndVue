@@ -283,7 +283,8 @@ export default {
   }
   .page {
     margin-top: 10px;
-    text-align: right;
+    justify-content: flex-end;
+    display: flex;
     // background-color: white;
     // box-shadow: 1px 1px 10px #5f5f5f;
     // padding: 10px;
