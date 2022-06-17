@@ -1,5 +1,4 @@
-package com.sunkai.test.service.impl;
-
+package com.sunkai.test.service.Impl;
 import com.sunkai.test.bean.Comments;
 import com.sunkai.test.mapper.CommentsMapper;
 import com.sunkai.test.service.ICommentsService;
