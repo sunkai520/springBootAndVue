@@ -10,6 +10,9 @@
         <div class="des">程序猿 / 轻随笔 / 轻生活 / 轻日记 / 轻梦想</div>
         <div class="zy">一份耕耘,一份收获</div>
       </div>
+      <div>
+        <Heart style="margin: auto"></Heart>
+      </div>
       <div class="beian">
         <a href="https://beian.miit.gov.cn">鲁ICP备2022001968号-1</a>
       </div>
@@ -20,7 +23,9 @@
 <script>
 import { reactive, toRefs } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
+import Heart from "@/components/cssCompents/heart.vue";
 export default {
+  components: { Heart },
   setup() {
     let states = reactive({
       src: require("../../assets/img/head.png"),
