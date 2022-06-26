@@ -177,6 +177,9 @@ export default {
       width: 100%;
       height: calc(100% - 50px);
     }
+    ::v-deep(.el-scrollbar__view){
+     overflow-x: hidden; 
+    }
   }
   .rightSection {
     position: absolute;
