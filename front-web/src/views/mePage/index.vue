@@ -5,7 +5,7 @@
         <img :src="src" alt="" @mouseover="mover" @mouseout="mout" />
       </div>
       <div style="margin-top: 20px">
-        <div class="na">我的名字：“伯符”</div>
+        <div class="na">我的名字：<span>&#128512;</span>“伯符”<span>&#128512;</span></div>
         <div class="wx">=== 微信：ei1115215 ===</div>
         <div class="des">程序猿 / 轻随笔 / 轻生活 / 轻日记 / 轻梦想</div>
         <div class="zy">一份耕耘,一份收获</div>
