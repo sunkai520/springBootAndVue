@@ -2,12 +2,16 @@
   <div class="home">
     <div class="header">
       <div class="tit">Blog</div>
-      <div class="menu" >
-        <span @click="go('/')" class="textHov"><i class="iconfont">&#xe699;</i>首页</span>
+      <div class="menu">
+        <span @click="go('/')" class="textHov"
+          ><i class="iconfont">&#xe699;</i>首页</span
+        >
         <span @click="go('/aboutMe')" class="textHov"
           ><i class="iconfont"> &#xe691;</i>关于我</span
         >
-        <span @click="goManager" class="textHov"><i class="iconfont">&#xe60a;</i>后台</span>
+        <span @click="goManager" class="textHov"
+          ><i class="iconfont">&#xe60a;</i>后台</span
+        >
         <!-- <span class="shu">/</span>
         <span @click="goMe">关于我</span> -->
       </div>
@@ -17,12 +21,11 @@
       <div class="content">
         <router-view></router-view>
       </div>
-      
     </div>
   </div>
 </template>
 <script>
-import { reactive, toRefs } from "vue-demi";
+import { onMounted, reactive, toRefs } from "vue-demi";
 import router from "@/router";
 import MePage from "@/views/mePage";
 export default {
@@ -42,7 +45,24 @@ export default {
     let goManager = () => {
       window.open("http://sunkaibk.xyz:8081");
     };
-
+    let timer = null
+    onMounted(() => {
+      let body = document.querySelector("body");
+      body.onclick = function (event) {
+        let x = event.clientX;
+        let y = event.clientY;
+        let pao = document.createElement("div");
+        pao.style.left = x + "px";
+        pao.style.top = y + "px";
+        pao.setAttribute("class", "q_pao");
+        body.appendChild(pao);
+        timer = setTimeout(() => {
+          body.removeChild(pao);
+          clearTimeout(timer);
+          timer=null
+        }, 500);
+      };
+    });
     return {
       ...toRefs(states),
       loginOut,

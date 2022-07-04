@@ -54,3 +54,27 @@ body * {
     --el-input-focus-border: #2950B8;
 }
 
+/*气泡特效*/
+.q_pao{
+    position: absolute;
+    border-radius: 50%;
+    animation: move 500ms;
+    z-index: 999999;
+}
+@keyframes move{
+    0%{
+        width: 0;
+        height: 0;
+        opacity: 1;
+        box-shadow: 0 0 10px inset red;
+        /*进行颜色变化*/
+        filter: hue-rotate(0);
+    }
+    100%{
+        width: 50px;
+        height: 50px;
+        opacity: 0.1;
+        box-shadow: 0 0 60px inset red;
+        filter: hue-rotate(360deg);
+    }
+}
