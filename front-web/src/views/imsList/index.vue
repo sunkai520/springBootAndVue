@@ -72,7 +72,9 @@ import pageHooks from "@/utils/pageHooks";
 import { getBkList, getTagsList } from "@/api/bkList";
 import router from "@/router";
 import CloudWork from "@/components/cloudWork.vue";
+import { onBeforeRouteLeave } from 'vue-router';
 export default {
+  name:"imsList",
   components: { CloudWork },
   setup() {
     const { pageParams, handlePageChange, handleSizeChange } =
@@ -89,13 +91,19 @@ export default {
       });
       states.tableData = res.data.data;
       states.total = res.data.total;
-      console.log(res, "res");
     }
     onMounted(() => {
       states.list_rows = 5;
       getList();
       getTagList();
     });
+    // onBeforeRouteLeave((to,from,next)=>{
+    //   console.log(to)
+    //   if(to.name!="detail"){
+    //     from.meta.keepAlive = false
+    //   }
+    //   next();
+    // })
     async function getTagList() {
       let res = await getTagsList({ keyWord: "" });
       states.cloudList = res.data;
@@ -122,7 +130,6 @@ export default {
       search();
     };
     let getImg = (item) => {
-      console.log(item, "item");
       let title = item.title;
       if (title.includes("java")) {
         return require("../../../src/assets/img/java.webp");

@@ -10,7 +10,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/',
         name: 'imsList',
-        component: () => import('@/views/imsList/index.vue')
+        component: () => import('@/views/imsList/index.vue'),
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: "/detail",

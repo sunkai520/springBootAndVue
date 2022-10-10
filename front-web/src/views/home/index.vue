@@ -19,7 +19,12 @@
     <div class="ct">
       <MePage></MePage>
       <div class="content">
-        <router-view></router-view>
+        <router-view v-slot="{ Component, route }" >
+          <keep-alive :include="tagNames">
+            <component :is="Component" :key="route.name" v-if="route.meta.keepAlive"/>
+          </keep-alive>
+            <component :is="Component" :key="route.name" v-if="!route.meta.keepAlive"/>
+        </router-view>
       </div>
     </div>
   </div>
@@ -28,6 +33,7 @@
 import { onMounted, reactive, toRefs } from "vue-demi";
 import router from "@/router";
 import MePage from "@/views/mePage";
+import { onBeforeRouteUpdate } from 'vue-router';
 export default {
   components: {
     MePage,
@@ -38,14 +44,16 @@ export default {
       localStorage.removeItem("user");
       router.replace("/login");
     };
-    let states = reactive({});
+    let states = reactive({
+      tagNames:["imsList"]
+    });
     let go = (url) => {
       router.push(url);
     };
     let goManager = () => {
       window.open("http://sunkaibk.xyz:8081");
     };
-    let timer = null
+    let timer = null;
     onMounted(() => {
       let body = document.querySelector("body");
       body.onclick = function (event) {
@@ -59,10 +67,17 @@ export default {
         timer = setTimeout(() => {
           body.removeChild(pao);
           clearTimeout(timer);
-          timer=null
+          timer = null;
         }, 500);
       };
     });
+    onBeforeRouteUpdate((to,from)=>{
+      if(to.name!="detail"&&to.name!="imsList"){
+        states.tagNames = [];
+      }else{
+        states.tagNames = ["imsList"];
+      }
+    })
     return {
       ...toRefs(states),
       loginOut,

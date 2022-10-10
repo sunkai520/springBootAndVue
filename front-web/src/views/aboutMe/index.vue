@@ -48,7 +48,6 @@ export default {
         states.imgLoad.push(1)
       }else{
         states.imgLoad.push(2)
-        console.log("未获得图片高度")
       }
       if(states.imgLoad.length==states.dataList.length&&!states.imgLoad.includes(2)){
         waterFall(document.querySelector(".aboutMe"), 5);
