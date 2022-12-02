@@ -51,7 +51,7 @@ export default {
       router.push(url);
     };
     let goManager = () => {
-      window.open("http://sunkaibk.xyz:8081");
+      window.open("http://mhxy.xyz:8081/");
     };
     let timer = null;
     onMounted(() => {
