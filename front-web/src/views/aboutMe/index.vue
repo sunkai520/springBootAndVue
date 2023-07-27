@@ -25,7 +25,7 @@ export default {
     let states = reactive({
       dataList: [
         { url: require("../../assets/img/echarts/echarts.jpg"),desc:"echarts可视化demo",title:"echarts实例",path:"/echarts"},
-        { url: require("../../assets/img/head.png"),desc:"文件分类管理系统",title:"文件分类管理",path:"http://mhxy.xyz:3000/"},
+        { url: require("../../assets/img/head.png"),desc:"文件分类管理系统",title:"文件分类管理",path:`${window.location.origin}:3000`},
         { url: require("../../assets/img/linux.jpg") },
         { url: require("../../assets/img/head.png") },
         { url: require("../../assets/img/linux.jpg") },
